@@ -1,0 +1,8 @@
+
+* Personal guide examples
+** TODO Chapter 1
+   CLOCK: [2011-06-12 Sun 19:38]--[2011-06-12 Sun 21:38] =>  2:00
+*** [[http://zguide.zeromq.org/page:all#Getting-the-Message-Out]]
+** TODO Chapter 2
+** TODO Chapter 3
+** TODO Chapter 4

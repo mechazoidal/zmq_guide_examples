@@ -1,7 +1,10 @@
 require 'zmq'
-#stringezhelpers'
+require '../trollop'
 
-COUNT = 100
+opts = Trollop::options do
+  opt :count, "how many updates", :default=>100
+  opt :zipcode, "which zipcode", :default=>"10001"
+end
 
 context = ZMQ::Context.new(1)
 
@@ -11,30 +14,27 @@ subscriber = context.socket(ZMQ::SUB)
 subscriber.connect ("tcp://localhost:5556")
 
 # subscribe to zipcode, default is NYC, 10001
-filter = ARGV.size > 0 ? argv[0] : "10001"
-subscriber.setsockopt(ZMQ::SUBSCRIBE, filter)
+subscriber.setsockopt(ZMQ::SUBSCRIBE, opts[:zipcode])
 
 # process 100 updates
-#
 total_temp = 0
 trap("INT") do
   # to catch and handle CTRL-C safely..
   puts "Exiting.."
-  puts "Average temperature for zipcode '#{filter}' was #{total_temp / COUNT}F"
+  puts "Average temperature for zipcode '#{opts[:zipcode]}' was #{total_temp / opts[:count]}F"
   subscriber.close
   context.close
   exit
 end
 
-1.upto(COUNT) do |update_nbr|
+1.upto(opts[:count]) do |update_nbr|
   zipcode, temperature, relhumidity = subscriber.recv.split.map(&:to_i)
   total_temp += temperature
-  #puts "received update #{update_nbr}"
   print"."
 end
 
 puts ""
-puts "Average temperature for zipcode '#{filter}' was #{total_temp / COUNT}F"
+puts "Average temperature for zipcode '#{opts[:zipcode]}' was #{total_temp / opts[:count]}F"
 
 subscriber.close
 context.close

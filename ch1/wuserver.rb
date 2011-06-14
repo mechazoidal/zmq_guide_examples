@@ -1,4 +1,9 @@
 require 'zmq'
+require '../trollop'
+
+opts = Trollop::options do
+  opt :verbose, "say a lot", :default=>false
+end
 
 context = ZMQ::Context.new(1)
 publisher = context.socket(ZMQ::PUB)
@@ -20,6 +25,12 @@ while true
   relhumidity = rand(50) + 10
 
   update = "%05d %d %d" % [zipcode, temperature, relhumidity]
-  #puts "sending update: #{update.to_s}"
+
+  # NOTE: This can trigger a "deadlock; recursive locking" ThreadError if you
+  # fire an interrupt.
+  if opts[:verbose]
+    $stdout << "sending update: #{update.to_s}\n" 
+    $stdout.flush
+  end
   publisher.send(update)
 end

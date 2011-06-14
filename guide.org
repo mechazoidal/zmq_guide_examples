@@ -1,8 +1,17 @@
 
 * Personal guide examples
-** TODO Chapter 1
+** DONE Chapter 1
+   CLOSED: [2011-06-13 Mon 22:48]
+   CLOCK: [2011-06-13 Mon 21:52]--[2011-06-13 Mon 22:48] =>  0:56
    CLOCK: [2011-06-12 Sun 19:38]--[2011-06-12 Sun 21:38] =>  2:00
 *** [[http://zguide.zeromq.org/page:all#Getting-the-Message-Out]]
-** TODO Chapter 2
+**** Interesting to note: the wuserver.rb will continually pump out messages on a PUB socket, so it will have high CPU usage.
+**** But the sink/ventilator example is using PUSH/PULL, and they will sleep until they've actually got work to do.
+*** Also note that we use trap("INT") in our Ruby tests, so that we can bail out with CTRL-C. [[http://zguide.zeromq.org/page:all#-MQ][This only started working in ZMQ 2.1]].
+**** (I think)
+*** Interesting oops: trying to use a Ruby int for a SUB filter in setsockopt will cause a segfault(in the FFI connection?)
+*** [[http://zguide.zeromq.org/page:all#Socket-Scalability]]
+**** Interesting: the ruby proc for wuserver stayed around 110% CPU, while kernel_task was at 20%. Individual wuclient procs were around 8%.
+** TODO [[http://zguide.zeromq.org/page:all#Chapter-Two-Intermediate-Stuff][Chapter 2]]
 ** TODO Chapter 3
 ** TODO Chapter 4

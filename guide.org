@@ -13,5 +13,11 @@
 *** [[http://zguide.zeromq.org/page:all#Socket-Scalability]]
 **** Interesting: the ruby proc for wuserver stayed around 110% CPU, while kernel_task was at 20%. Individual wuclient procs were around 8%.
 ** TODO [[http://zguide.zeromq.org/page:all#Chapter-Two-Intermediate-Stuff][Chapter 2]]
+   CLOCK: [2011-06-15 Wed 22:30]--[2011-06-15 Wed 22:38] =>  0:08
+   CLOCK: [2011-06-15 Wed 21:38]--[2011-06-15 Wed 22:21] =>  0:43
+*** Argh: the mspoller.rb example won't work yet.
+**** Straight 'zmq' gem doesn't have Poller support yet(which is a wrapper for zmq_poll with POLLIN)
+**** ffi-rzmq has it, but currently it doesn't look for the ZMQ lib in the Macports location: [[https://github.com/chuckremes/ffi-rzmq/pull/25]]
+***** So we might have to wait a few days for that pull request? :(
 ** TODO Chapter 3
 ** TODO Chapter 4

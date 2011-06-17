@@ -13,11 +13,23 @@
 *** [[http://zguide.zeromq.org/page:all#Socket-Scalability]]
 **** Interesting: the ruby proc for wuserver stayed around 110% CPU, while kernel_task was at 20%. Individual wuclient procs were around 8%.
 ** TODO [[http://zguide.zeromq.org/page:all#Chapter-Two-Intermediate-Stuff][Chapter 2]]
+   CLOCK: [2011-06-16 Thu 21:48]--[2011-06-16 Thu 22:29] =>  0:41
    CLOCK: [2011-06-15 Wed 22:30]--[2011-06-15 Wed 22:38] =>  0:08
    CLOCK: [2011-06-15 Wed 21:38]--[2011-06-15 Wed 22:21] =>  0:43
 *** Argh: the mspoller.rb example won't work yet.
 **** Straight 'zmq' gem doesn't have Poller support yet(which is a wrapper for zmq_poll with POLLIN)
 **** ffi-rzmq has it, but currently it doesn't look for the ZMQ lib in the Macports location: [[https://github.com/chuckremes/ffi-rzmq/pull/25]]
 ***** So we might have to wait a few days for that pull request? :(
+*** TODO Finish these examples once ffi-rzmq gets proper MacPorts support 
+**** [[http://zguide.zeromq.org/page:all#Handling-Multiple-Sockets]]
+**** [[http://zguide.zeromq.org/page:all#Handling-Errors-and-ETERM]]
+**** [[http://zguide.zeromq.org/page:all#A-Request-Reply-Broker]]
+*** [[http://zguide.zeromq.org/page:all#Multithreading-with-MQ]]
 ** TODO Chapter 3
 ** TODO Chapter 4
+
+* Contribute to [[http://zguide.zeromq.org/][ZMQ Guide]] for ruby examples
+** TODO Do we need to use the ffi-rzmq gem, or keep on using straight zmq gem?
+** TODO [[http://zguide.zeromq.org/page:all#Version-Reporting][ZMQ Version]] (zhelpers.rb)
+** TODO [[http://zguide.zeromq.org/page:all#Handling-Interrupt-Signals][Interrupt handling]]( interrupt.rb)
+** TODO ch2/wuproxy.rb

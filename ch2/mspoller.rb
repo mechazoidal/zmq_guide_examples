@@ -23,7 +23,7 @@ poller = ZMQ::Poller.new
 poller.register(receiver, ZMQ::POLLIN)
 poller.register(subscriber, ZMQ::POLLIN)
 
-#ZMQ::Helpers.exit_on_int([receiver, subscriber, poller], context)
+#ZMQ::Helpers.s_interrupted([receiver, subscriber, poller], context)
 
 trap("INT") do
   # to catch and handle CTRL-C safely..
